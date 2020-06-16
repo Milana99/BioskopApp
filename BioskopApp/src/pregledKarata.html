@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <title>Filmovi</title>
+    <meta charset="utf-8"/>
+    <script src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/korisnik.js"></script>
+    <link rel="stylesheet" href=""/>
+</head>
+<body>
+<h1>Pregled rezervisanih karata!</h1>
+	<div id="rezKarte">
+    <br><br>
+    <div style="width:260px; border-style:solid; broder-width:5px; padding:5px">
+        <table id="filmovi" style="border-style:solid; broder-width:5px;">
+            <tr>
+                <th>Naziv filma</th>
+                <th>Cena</th>
+                <th>Sala</th>
+                <th>Otkazivanje</th>
+            </tr>
+            
+            <tr id = "film">
+                <th>Neki film</th>
+                <th>123</th>
+                <th>A1</th>
+                <th><button onclick = "getElementById('film').style.display = 'none';">Otkazi</button></th>
+            </tr>
+            <tr id = "film2">
+                <th>Film12</th>
+                <th>324</th>
+                <th>B2</th>
+                <th><button onclick = "getElementById('film2').style.display = 'none';">Otkazi</button></th>
+            </tr>
+        </table>
+    </div>
+</div>
+	
+
+</body>
+</html>

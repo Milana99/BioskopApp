@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <title>Filmovi</title>
+    <meta charset="utf-8"/>
+    <script src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/korisnik.js"></script>
+    <link rel="stylesheet" href=""/>
+</head>
+<body>
+	
+	<div id="sviFilmovi">
+    <h1>Filmovi u ponudi</h1>
+    <br><br>
+    <div style="width:340px; border-style:solid; broder-width:5px; padding:5px">
+        <table id="filmovi" style="border-style:solid; broder-width:5px;">
+            <tr >
+                <th>Naziv</th>
+                <th>Zanr</th>
+                <th>Opis</th>
+                <th>Ocena</th>
+                <th>Cena</th>
+                <th>Vreme projekcije</th>
+            </tr>
+        </table>
+    </div>
+</div>
+<br/>
+<form > 
+	<input type="text" placeholder = "Naziv filma">
+	<input type="text" placeholder = "Zanr filma">
+	<input type = "text" placeholder = "Opis filma">
+	<select name="ocenaFilma" >
+		<option>---Izaberite ocenu----</option>
+		<option>1</option>
+		<option>2</option>
+		<option>3</option>
+		<option>4</option>
+		<option>5</option>
+	</select>
+	<input type = "text" placeholder = "Cena filma">
+	<input type = "text" placeholder = "Vreme projekcije filma">
+	<input type = "submit" value ="Pretrazi">
+</form>
+<br/>
+<select name="sortirajFilmove" >
+		<option>---Sortiranje----</option>
+		<option>Opadajuce</option>
+		<option>Rastuce</option>
+	</select>
+</body>
+</html>

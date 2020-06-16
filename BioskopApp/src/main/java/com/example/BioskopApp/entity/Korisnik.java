@@ -44,10 +44,35 @@ public class Korisnik implements Serializable {
 	@Column
 	protected Boolean aktivan;
 	
-	public Korisnik(Long id, String korisnicko_ime, String lozinka, String ime, String prezime, String kontakt_telefon, 
-			String email, Date datum_rodjenja, Uloge uloga, Boolean aktivan) 
+	public Korisnik(String korisnicko_ime, String lozinka, String ime, String prezime, String kontakt_telefon, 
+			String email, Date datum_rodjenja) 
 			{
-				this.id = id; 
+				this.korisnicko_ime = korisnicko_ime;
+				this.lozinka = lozinka;
+				this.ime = ime;
+				this.prezime = prezime;
+				this.kontakt_telefon = kontakt_telefon;
+				this.email = email; 
+				this.datum_rodjenja = datum_rodjenja; 
+
+			}
+	public Korisnik(Long id, String korisnicko_ime, String lozinka, String ime, String prezime, String kontakt_telefon, 
+			String email, Date datum_rodjenja) 
+			{
+				this.id = id;
+				this.korisnicko_ime = korisnicko_ime;
+				this.lozinka = lozinka;
+				this.ime = ime;
+				this.prezime = prezime;
+				this.kontakt_telefon = kontakt_telefon;
+				this.email = email; 
+				this.datum_rodjenja = datum_rodjenja; 
+			}
+	
+	public Korisnik(Long id, String korisnicko_ime, String lozinka, String ime, String prezime, String kontakt_telefon, 
+			String email, Date datum_rodjenja, Uloge uloga, Boolean aktivan ) 
+			{
+				this.id = id;
 				this.korisnicko_ime = korisnicko_ime;
 				this.lozinka = lozinka;
 				this.ime = ime;
@@ -71,6 +96,10 @@ public class Korisnik implements Serializable {
 				this.datum_rodjenja = datum_rodjenja; 
 				this.uloga = uloga;
 			}
+	
+	public Long getId() {
+		return id;
+	}
 	
 	public String getKorisnickoIme() {
 		return korisnicko_ime;
