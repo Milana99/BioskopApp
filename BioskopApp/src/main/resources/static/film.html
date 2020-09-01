@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+        <title>Movie</title>
+          <script th:inline="javascript">
+	    var film = /*[[${film}]]*/;
+	    </script>
+        <script src="js/login.js" type="text/javascript"></script>
+        <script src="js/auth.js" type="text/javascript"></script>
+        <script src="js/movies.js" type="text/javascript"></script>
+         <script src="https://kit.fontawesome.com/705b70177f.js" crossorigin="anonymous"></script>
+	</head>
+	<body onload="initMovie()">
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+        
+          <span class="navbar-brand" href="#">CINEMAS</span>
+  			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    			<span class="navbar-toggler-icon"></span>
+  			</button>
+
+  		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+    		<ul class="navbar-nav ml-auto">
+      			<li class="nav-item">
+       				<a class="nav-link" href="index.html" >Home<span class="sr-only">(current)</span></a>
+     			</li>
+			    <li class="nav-item ">
+			        <a class="nav-link" href="bioskopi.html">Cinemas</a>
+			    </li>
+			     <li class="nav-item ">
+			       <a class="nav-link" href="filmovi.html" >Movies</a>
+			     </li>
+		      <li class="nav-item"  id="offline">
+		        <a class="nav-link" href="login.html">Login</a>
+		      </li>
+		      <li class="nav-item dropdown online">
+		        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		          User
+		        </a>
+		        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+		          <a class="dropdown-item" onclick="profile()">Pofile</a>
+		          <div class="dropdown-divider"></div>
+		          <a class="dropdown-item" onclick="logOut()">Logout</a>
+		        </div>
+		      </li>
+    		</ul>
+ 		 </div>
+        </div>
+      </nav>
+
+<main>
+
+<div  class="row justify-content-center online" >
+            <div class="card col-sm-6 bg-dark " style="box-shadow: 1px 1px 10px black;" >
+                <div class="row no-gutters">
+                    
+                     <div class="card-body bg-dark "> 
+                          <h5 class="card-title" style="text-align:center;padding:0.75rem 0.25rem 0.25rem 0.25rem;" th:text="${film.naziv}"></h5>
+                          <ul class="list-group list-group-flush">
+                            <li class="list-group-item bg-dark" th:text="'Genre : ' + ${film.zanr}"></li>
+                            <li class="list-group-item bg-dark" th:text="'Description : ' + ${film.opis}"></li>
+                            <li class="list-group-item bg-dark" th:text="'Rating : ' + ${film.ocena}"></li>
+                            <li class="list-group-item bg-dark" th:text="'Duration : ' + ${film.trajanje_min}"></li>
+                          </ul>
+                        </div><br/>
+
+              
+                        </div>
+                    
+                </div>
+            </div>
+        </div>
+
+       <br/>
+        <div class="row justify-content-center">
+            <div class="col-auto">
+                <table id="Movies" class="table table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th style="width: 180px;">Date</th>
+                        <th style="width: 180px;">Time</th>
+                        <th style="width: 180px;">Price</th>
+                        <th style="width: 100px;"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr each="projekcija : ${film.lista_projekcija}" id="projekcija.id">
+                        <td text="${projekcija.dan}"></td>
+                        <td text="${projekcija.vreme}"></td>
+                        <td text="${projekcija.cena}"></td>
+                        <td style="width: 40px;"><button type="button" onclick="'reserve('+${projekcija.id}+')'" class="btn-sub">Reserve</button></td>
+                    </tr>
+                </tbody>
+                </table>
+            </div>
+        </div>
+
+        </main>
+      
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="css/styleFilm.css">
+	</body>
+</html>

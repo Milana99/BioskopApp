@@ -1,16 +1,122 @@
-<!DOCTYPE HTML>
-<html lang="en" xmlns:th="http://thymeleaf.org">
-<head>
-    <title>Filmovi</title>
-    <meta charset="utf-8"/>
-    <script src="/js/jquery.min.js"></script>
-    <script type="text/javascript" src="/js/korisnik.js"></script>
-    <link rel="stylesheet" href=""/>
-</head>
-<body>
-<h1>Filmovi!</h1>
-	<a href = "/pretraga.html"><button>Pogledaj filmove u ponudi</button></a>
-	
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+        <title>Movies</title>
+        
+          <script th:inline="javascript">
+	    var filmoviDTO = /*[[${filmoviDTO}]]*/;
+	    </script>
+	    
+        <script src="js/login.js" type="text/javascript"></script>
+        <script src="js/auth.js" type="text/javascript"></script>
+        <script src="js/movies.js" type="text/javascript"></script>
+         <script src="https://kit.fontawesome.com/705b70177f.js" crossorigin="anonymous"></script>
+	</head>
+	<body onload="initMovies()">
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+        
+          <span class="navbar-brand" href="#">CINEMAS</span>
+  			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    			<span class="navbar-toggler-icon"></span>
+  			</button>
 
-</body>
+  		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+    		<ul class="navbar-nav ml-auto">
+      			<li class="nav-item">
+       				<a class="nav-link" href="index.html" >Home<span class="sr-only">(current)</span></a>
+     			</li>
+			    <li class="nav-item ">
+			        <a class="nav-link" href="bioskopi.html">Cinemas</a>
+			    </li>
+			     <li class="nav-item active">
+			       <a class="nav-link" href="filmovi.html"  style="border-bottom: solid white;">Movies</a>
+			     </li>
+		      <li class="nav-item"  id="offline">
+		        <a class="nav-link" href="login.html">Login</a>
+		      </li>
+		      <li class="nav-item dropdown online">
+		        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		          User
+		        </a>
+		        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+		          <a class="dropdown-item" onclick="profile()">Pofile</a>
+		          <div class="dropdown-divider"></div>
+		          <a class="dropdown-item" onclick="logOut()">Logout</a>
+		        </div>
+		      </li>
+    		</ul>
+ 		 </div>
+        </div>
+      </nav>
+
+        <main>
+        <div class="row justify-content-center ">
+            <nav class="navbar navbar-light bg-dark">
+                <form class="form-inline">
+                    <input class="form-control mr-sm-2" id="imeFilma" style="width: 140px;" type="search" placeholder="Movie name" aria-label="Search">
+                    
+                    <select  class="custom-select mr-sm-2" id="zanr">
+                        <option selected>Genre</option>
+                        <option th:each="zanr : ${filmoviDTO.zanrovi}" th:text="${zanr}"></option>
+                    </select>
+
+                    <input class="form-control mr-sm-2" id="opis" type="search" style="width: 140px;" placeholder="Description" aria-label="Search">
+
+                    <input class="form-control mr-sm-2" id="ocena" type="search" placeholder="Rating (1-10)" style="width: 140px;" aria-label="Search">
+
+                    <input class="form-control mr-sm-2" id="cena" type="search"  style="width: 100px;"placeholder="Price" aria-label="Search">
+
+                    <input class="form-control mr-sm-2" id="trajanje_min" type="search" placeholder="Time: HH:MM" style="width: 140px;" aria-label="Search">
+
+                    <button class="btn btn-light" type="button" onclick="filterData(filmoviDTO)">
+                      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
+                        <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+                      </svg>
+                    </button>
+                </form>
+            </nav>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-auto">
+                <table id="tabela" class="table table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th></th>
+                        <th   onclick="sortTable(1)">Name <i id="th1" class="fa fa-fw fa-sort"></i></th>
+                        <th   onclick="sortTable(2)">Genre<i id="th2" class="fa fa-fw fa-sort"></i></th>
+                        <th   onclick="sortTable(3)">Description<i id="th3" class="fa fa-fw fa-sort"></i></th>
+                        <th   onclick="sortTable(4)">Rating<i id="th4" class="fa fa-fw fa-sort"></i></th>
+                        <th   onclick="sortTable(5)">Duration<i id="th5" class="fa fa-fw fa-sort"></i></th>
+                        <th></th>
+                        
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr each="film : ${filmoviDTO.filmovi}" id="${film.id}">
+                        
+                        <td text="${film.naziv}"></td>
+                        <td text="${film.zanr}"></td>
+                        <td text="${film.opis}"></td>
+                        <td text="${film.ocena}"></td>
+                        <td text="${film.trajanje_min} + ' min'"></td>
+                        <td></td>
+                        <td><button type="button" onclick="'getMovie('+${film.id}+')'" class="btn-sub gledalac">More info</button></td>
+                    </tr>
+                </tbody>
+                </table>
+            </div>
+        </div>
+
+        </main>
+      
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="css/styleFilmovi.css">
+	</body>
 </html>
