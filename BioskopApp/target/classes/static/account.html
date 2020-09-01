@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+	<title>Profile</title>
+        <script th:inline="javascript">
+	    var korisnik = /*[[${korisnik}]]*/;
+	    </script>
+        <script src="js/login.js" type="text/javascript"></script>
+        <script src="js/auth.js" type="text/javascript"></script>
+        <script src="js/admin.js" type="text/javascript"></script>
+        <script src="js/room.js" type="text/javascript"></script>
+        <title></title>
+        <script src="https://kit.fontawesome.com/705b70177f.js" crossorigin="anonymous"></script>
+        
+	</head>
+	<body onload="initAcc()">
+        
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+        
+          <span class="navbar-brand" href="#">CINEMAS</span>
+  			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    			<span class="navbar-toggler-icon"></span>
+  			</button>
+
+  		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+    		<ul class="navbar-nav ml-auto">
+      			<li class="nav-item active">
+       				<a class="nav-link" href="index.html" >Home<span class="sr-only">(current)</span></a>
+     			</li>
+			    <li class="nav-item">
+			        <a class="nav-link" href="bioskopi.html">Cinemas</a>
+			    </li>
+			     <li class="nav-item">
+			       <a class="nav-link" href="filmovi.html">Movies</a>
+			     </li>
+		      <li class="nav-item"  id="offline">
+		        <a class="nav-link" href="login.html">Login</a>
+		      </li>
+		      <li class="nav-item dropdown active online" style="border-bottom: solid white;">
+		        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		          User
+		        </a>
+		        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+		          <a class="dropdown-item" onclick="profile()">Profile</a>
+		          <div class="dropdown-divider"></div>
+		          <a class="dropdown-item" onclick="logOut()">Logout</a>
+		        </div>
+		      </li>
+    		</ul>
+ 		 </div>
+        </div>
+      </nav>
+    
+        <main>
+        <div  class="row justify-content-center online">
+            <div class="card col-sm-6 bg-dark" style="box-shadow: 1px 1px 10px black;" >
+                <div class="row no-gutters">
+                     <div class="card-body bg-dark" > 
+                        <h1 class="card-title bg-dark " style="text-align: center; text-decoration-color: white;
+  text-transform: uppercase;" th:text="${korisnik.username}"></h1>
+                    
+                          <ul class="list-group list-group-flush ">
+                            <li class="list-group-item bg-dark" th:text="'Name : ' + ${korisnik.ime}"></li>
+                            <li class="list-group-item bg-dark" th:text="'Lastname : ' + ${korisnik.prezime}"></li>
+                            <li class="list-group-item bg-dark" th:text="'E-mail : ' + ${korisnik.email}"></li>
+                            <li class="list-group-item bg-dark" th:text="'Phone number : ' + ${korisnik.telefon}"></li>
+                            <li class="list-group-item bg-dark" th:text="'Date of creation : ' + ${korisnik.datum_rodjenja}"></li>
+                          </ul> <br/>
+
+              
+                        </div>
+                </div>
+            </div>
+        </div> <br/>
+        <div class="row justify-content-center gledalac">    
+            <nav class="navbar navbar-expand-lg navbar-light bg-dark bg-light static-top">
+              <div class="container">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                    </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                  <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                      <a class="nav-link" onclick="watched_movies()">Watched Movies</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" onclick="reservations()">Reservations</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </nav>    
+        </div>  
+<br/>
+
+        <div class="row justify-content-center admin">    
+            <nav class="navbar navbar-expand-lg navbar-light bg-light static-top bg-dark">
+              <div class="container adim">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                    </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                  <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                      <a class="nav-link" onclick="managers()">Managers</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" onclick="createManager()">Create a manager</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </nav>    
+        </div><br/>
+
+        <div class="row justify-content-center menadzer">    
+            <nav class="navbar navbar-expand-lg navbar-light bg-light static-top bg-dark">
+              <div class="container">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                    </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                  <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                      <a class="nav-link" onclick="cinema()">Cinemas</a>
+                    </li>
+                    <li class="nav-item ">
+                      <a class="nav-link" onclick="schedule()">Make schedule</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </nav>    
+        </div>
+
+        </main>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/styleAcc.css">
+	</body>
+</html>

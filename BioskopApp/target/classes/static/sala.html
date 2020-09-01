@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Edit Room</title>
+        <script th:inline="javascript">
+        var sala= /*[[${sala}]]*/;
+        </script>
+        <script src="js/login.js" type="text/javascript"></script>
+        <script src="js/cinema.js" type="text/javascript"></script>
+        
+    </head>
+    <body onload="initAcc()">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+        
+          <span class="navbar-brand" href="#">CINEMAS</span>
+  			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    			<span class="navbar-toggler-icon"></span>
+  			</button>
+
+  		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+    		<ul class="navbar-nav ml-auto">
+      			<li class="nav-item active">
+       				<a class="nav-link" href="index.html" >Home<span class="sr-only">(current)</span></a>
+     			</li>
+			    <li class="nav-item">
+			        <a class="nav-link" href="bioskopi.html">Cinemas</a>
+			    </li>
+			     <li class="nav-item">
+			       <a class="nav-link" href="filmovi.html">Movies</a>
+			     </li>
+		      <li class="nav-item"  id="offline">
+		        <a class="nav-link" href="login.html">Login</a>
+		      </li>
+		      <li class="nav-item dropdown  online" >
+		        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		          User
+		        </a>
+		        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+		          <a class="dropdown-item" onclick="profile()">Profile</a>
+		          <div class="dropdown-divider"></div>
+		          <a class="dropdown-item" onclick="logOut()">Logout</a>
+		        </div>
+		      </li>
+    		</ul>
+ 		 </div>
+        </div>
+      </nav>
+
+      <div class="row text-center" id="innerdiv" >
+        <div class="col-lg-4 m-auto text-center">
+            <div class="card mt-5 bg-dark main-section" >
+                <div class="card-title text-center mt-3">
+                
+                    <div><h1>Edit Room</h1></div>
+                </div>
+
+                <div class="card-body">
+                    <form>
+                        <div class="input-group mb-3">
+                            
+                            <input type="text" class="form-control py-4" id="oznaka" placeholder="Mark" value="${sala.oznaka}">
+                        </div>
+                        <div class="input-group mb-3">
+
+                            <input class="form-control py-4" type="text" id="kapacitet" value="${sala.kapacitet}" placeholder="Capacity"/>
+                        </div>
+
+                        <button type="button" onclick="'editSala('+${sala.id}+')'" class="btn-sub">Save</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+        
+        
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/styleBioskop.css">
+    </body>
+</html>
